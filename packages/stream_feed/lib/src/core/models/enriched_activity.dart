@@ -63,34 +63,31 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
     Ob Function(Object? json)? fromJsonOb,
     T Function(Object? json)? fromJsonT,
     Or Function(Object? json)? fromJsonOr,
-  ]) =>
-      _$GenericEnrichedActivityFromJson<A, Ob, T, Or>(
-        Serializer.moveKeysToRoot(json, topLevelFields)!,
-        fromJsonA ??
-            (jsonA) => (A == User)
-                ? User.fromJson(jsonA! as Map<String, dynamic>) as A
-                : jsonA as A,
-        fromJsonOb ??
-            (jsonOb) => (Ob ==
-                    CollectionEntry) // TODO: can be a list of collection entry and a list of activities
-                ? CollectionEntry.fromJson(jsonOb! as Map<String, dynamic>)
-                    as Ob
-                : jsonOb as Ob,
-        fromJsonT ??
-            (jsonT) => (T == Activity)
-                ? Activity.fromJson(jsonT! as Map<String, dynamic>) as T
-                : jsonT as T,
-        fromJsonOr ??
-            (jsonOr) {
-              if (Or == User) {
-                return User.fromJson(jsonOr! as Map<String, dynamic>) as Or;
-              } else if (Or == Reaction) {
-                return Reaction.fromJson(jsonOr! as Map<String, dynamic>) as Or;
-              } else {
-                return jsonOr as Or;
-              }
-            },
-      );
+  ]) {
+    final _ = json?['foreign_id'];
+    json?.remove('foreign_id');
+    json?['foreign_id2'] = _;
+
+    return _$GenericEnrichedActivityFromJson<A, Ob, T, Or>(
+      Serializer.moveKeysToRoot(json, topLevelFields)!,
+      fromJsonA ?? (jsonA) => (A == User) ? User.fromJson(jsonA! as Map<String, dynamic>) as A : jsonA as A,
+      fromJsonOb ??
+          (jsonOb) => (Ob == CollectionEntry) // TODO: can be a list of collection entry and a list of activities
+              ? CollectionEntry.fromJson(jsonOb! as Map<String, dynamic>) as Ob
+              : jsonOb as Ob,
+      fromJsonT ?? (jsonT) => (T == Activity) ? Activity.fromJson(jsonT! as Map<String, dynamic>) as T : jsonT as T,
+      fromJsonOr ??
+          (jsonOr) {
+            if (Or == User) {
+              return User.fromJson(jsonOr! as Map<String, dynamic>) as Or;
+            } else if (Or == Reaction) {
+              return Reaction.fromJson(jsonOr! as Map<String, dynamic>) as Or;
+            } else {
+              return jsonOr as Or;
+            }
+          },
+    );
+  }
 
   /// The Stream id of the activity.
   @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
@@ -265,7 +262,5 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
     Object? Function(Or value) toJsonOr,
   ) =>
       Serializer.moveKeysToMapInPlace(
-          _$GenericEnrichedActivityToJson(
-              this, toJsonA, toJsonOb, toJsonT, toJsonOr),
-          topLevelFields);
+          _$GenericEnrichedActivityToJson(this, toJsonA, toJsonOb, toJsonT, toJsonOr), topLevelFields);
 }
