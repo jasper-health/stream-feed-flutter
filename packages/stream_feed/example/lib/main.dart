@@ -456,7 +456,7 @@ Future<void> main() async {
 
   await client.images.getResized(
     imageUrl,
-    const Resize(50, 50),
+    const Resize(height:50,width: 50),
   );
 
 // deleting an image using the url returned by the APIs

@@ -27,22 +27,33 @@ extension ResizeX on ResizeType {
 /// Resize an image based on supplied [_width],[_height] and eventually [_type]
 class Resize {
   /// [Resize] constructor
-  const Resize(
-    this._width,
-    this._height, {
+  const Resize({
+    int? width,
+    int? height,
     ResizeType type = ResizeType.clip,
-  })  : assert(_width > 0, 'Width should be a positive number'),
-        assert(_height > 0, 'Height should be a positive number'),
-        _type = type;
+  })  : assert(width!=null && width > 0, 'Width should be a positive number'),
+        assert(height!= null && height > 0, 'Height should be a positive number'),
+   _type = type,
+        _width = width,
+        _height = height;
 
-  final int _width;
-  final int _height;
+  final int? _width;
+  final int? _height;
   final ResizeType _type;
 
   /// Serialize params
-  Map<String, Object?> get params => <String, Object?>{
-        'resize': _type.name,
-        'w': _width,
-        'h': _height,
-      };
+  Map<String, Object?> get params {
+    final payload = <String, Object?>{
+      'resize': _type.name,
+    };
+    if (_width != null) {
+      payload['w'] = _width;
+    }
+
+    if (_height != null) {
+      payload['h'] = _height;
+    }
+
+    return payload;
+  }
 }

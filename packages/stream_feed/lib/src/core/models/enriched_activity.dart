@@ -64,9 +64,10 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
     T Function(Object? json)? fromJsonT,
     Or Function(Object? json)? fromJsonOr,
   ]) {
-    final _ = json?['foreign_id'];
+    ///Mark issue [https://github.com/GetStream/stream-feed-flutter/issues/236]
+    // final _ = json?['foreign_id'];
     json?.remove('foreign_id');
-    json?['foreign_id2'] = _;
+    // json?['foreign_id2'] = _;
 
     return _$GenericEnrichedActivityFromJson<A, Ob, T, Or>(
       Serializer.moveKeysToRoot(json, topLevelFields)!,

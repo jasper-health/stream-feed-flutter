@@ -229,7 +229,7 @@ void main() {
       verb: 'test',
       target: 'test',
       to: const ['test'],
-      foreignId: 'test',
+      // foreignId: 'test',
       time: DateTime.parse('2001-09-11T00:01:02.000Z'),
       analytics: const {'test': 'test'},
       extraContext: const {'test': 'test'},
@@ -290,7 +290,7 @@ void main() {
       verb: 'test',
       target: 'test',
       to: const ['test'],
-      foreignId: 'test',
+      // foreignId: 'test',
       time: DateTime.parse('2001-09-11T00:01:02.000Z'),
       analytics: const {'test': 'test'},
       extraContext: const {'test': 'test'},
@@ -682,7 +682,7 @@ void main() {
       verb: 'test',
       target: 'test',
       to: const ['test'],
-      foreignId: 'test',
+      // foreignId: 'test',
       time: DateTime.parse('2001-09-11T00:01:02.000Z'),
       analytics: const {'test': 'test'},
       extraContext: const {'test': 'test'},
@@ -758,7 +758,7 @@ void main() {
             'target': 'test',
             'object': 'test',
             'origin': 'test',
-            'foreign_id': 'test',
+            // 'foreign_id': 'test',
             'time': '2001-09-11T00:01:02-00:00',
             'test': 'test'
           }
@@ -999,20 +999,20 @@ void main() {
 
   group('Resize', () {
     test('params', () {
-      const resize = Resize(10, 10);
+      const resize = Resize(height: 10, width: 10);
       expect(resize.params, {'resize': 'clip', 'w': 10, 'h': 10});
     });
 
     test('Width should be a positive number', () {
       expect(
-          () => Resize(-1, 10),
+          () =>  Resize(width: -1,height: 10),
           throwsA(predicate<AssertionError>(
               (e) => e.message == 'Width should be a positive number')));
     });
 
     test('Height should be a positive number', () {
       expect(
-          () => Resize(10, -1),
+          () =>  Resize(width: 10,height: -1),
           throwsA(predicate<AssertionError>(
               (e) => e.message == 'Height should be a positive number')));
     });

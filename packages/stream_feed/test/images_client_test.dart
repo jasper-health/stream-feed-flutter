@@ -36,7 +36,7 @@ void main() {
 
     test('getResized', () async {
       const url = 'url';
-      const resize = Resize(50, 50);
+      const resize = Resize(width: 50, height: 50);
       when(() => api.get(token, url, options: resize.params))
           .thenAnswer((invocation) async => 'whatever');
 
