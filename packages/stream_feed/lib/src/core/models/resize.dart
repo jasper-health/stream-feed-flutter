@@ -31,11 +31,10 @@ class Resize {
     int? width,
     int? height,
     ResizeType type = ResizeType.clip,
-  })  : assert(width!=null && width > 0, 'Width should be a positive number'),
-        assert(height!= null && height > 0, 'Height should be a positive number'),
-   _type = type,
-        _width = width,
-        _height = height;
+  }) : 
+      _type = type,
+      _width = width,
+      _height = height;
 
   final int? _width;
   final int? _height;

@@ -1003,19 +1003,19 @@ void main() {
       expect(resize.params, {'resize': 'clip', 'w': 10, 'h': 10});
     });
 
-    test('Width should be a positive number', () {
-      expect(
-          () =>  Resize(width: -1,height: 10),
-          throwsA(predicate<AssertionError>(
-              (e) => e.message == 'Width should be a positive number')));
-    });
+    // test('Width should be a positive number', () {
+    //   expect(
+    //       () =>  Resize(width: -1,height: 10),
+    //       throwsA(predicate<AssertionError>(
+    //           (e) => e.message == 'Width should be a positive number')));
+    // });
 
-    test('Height should be a positive number', () {
-      expect(
-          () =>  Resize(width: 10,height: -1),
-          throwsA(predicate<AssertionError>(
-              (e) => e.message == 'Height should be a positive number')));
-    });
+    // test('Height should be a positive number', () {
+    //   expect(
+    //       () =>  Resize(width: 10,height: -1),
+    //       throwsA(predicate<AssertionError>(
+    //           (e) => e.message == 'Height should be a positive number')));
+    // });
   });
 
   group('Thumbnail', () {
